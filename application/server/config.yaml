@@ -1,0 +1,93 @@
+version: 1.0.0
+
+# GO SDK使用的客户端部分。
+client:
+  # 客户端所属的组织，必须是organizations定义的组织
+  organization: TESLA
+  # 日志级别
+  logging:
+    level: info
+  # MSP证书的根路径
+  cryptoconfig:
+    path: /network/crypto-config
+
+# 通道定义
+channels:
+  appchannel:
+    orderers:
+      - orderer.carunion.com
+    peers:
+      peer0.tesla.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.tesla.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+# 组织配置
+organizations:
+  TESLA:
+    mspid: "TESLAMSP"
+    cryptoPath: peerOrganizations/tesla.com/users/{username}@tesla.com/msp
+    peers:
+      - peer0.tesla.com
+      - peer1.tesla.com
+
+# orderer节点列表
+orderers:
+  orderer.carunion.com:
+    url: orderer.carunion.com:7050
+    # 传递给gRPC客户端构造函数
+    grpcOptions:
+      ssl-target-name-override: orderer.carunion.com
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      allow-insecure: true
+
+# peers节点列表
+peers:
+  # peer节点定义，可以定义多个
+  peer0.tesla.com:
+    # URL用于发送背书和查询请求
+    url: peer0.tesla.com:7051
+    # 传递给gRPC客户端构造函数
+    grpcOptions:
+      ssl-target-name-override: peer0.tesla.com
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      allow-insecure: true
+  peer1.tesla.com:
+    url: peer1.tesla.com:7051
+    grpcOptions:
+      ssl-target-name-override: peer1.tesla.com
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      allow-insecure: true
+  peer0.benz.com:
+    url: peer0.benz.com:7051
+    grpcOptions:
+      ssl-target-name-override: peer0.benz.com
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      allow-insecure: true
+  peer1.benz.com:
+    url: peer1.benz.com:7051
+    grpcOptions:
+      ssl-target-name-override: peer1.benz.com
+      keep-alive-time: 0s
+      keep-alive-timeout: 20s
+      keep-alive-permit: false
+      fail-fast: false
+      allow-insecure: true
