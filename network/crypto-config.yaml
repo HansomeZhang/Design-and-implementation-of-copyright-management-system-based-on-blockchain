@@ -1,0 +1,24 @@
+# 排序节点的组织定义
+OrdererOrgs:
+  - Name: CARUNION # 名称
+    Domain: carunion.com # 域名
+    Specs: # 节点域名：orderer.carunion.com
+      - Hostname: orderer # 主机名
+
+# peer节点的组织定义
+PeerOrgs:
+  # BENZ-组织
+  - Name: BENZ # 名称
+    Domain: benz.com # 域名
+    Template: # 使用模板定义。Count 指的是该组织下组织节点的个数
+      Count: 2 # 节点域名：peer0.benz.com 和 peer1.benz.com
+    Users: # 组织的用户信息。Count 指该组织中除了 Admin 之外的用户的个数
+      Count: 1 # 用户：Admin 和 User1
+
+  # TESLA-组织
+  - Name: TESLA
+    Domain: tesla.com
+    Template:
+      Count: 2 # 节点域名：peer0.tesla.com 和 peer1.tesla.com
+    Users:
+      Count: 1 # 用户：Admin 和 User1

@@ -1,0 +1,50 @@
+{
+  "name": "fabric-network",
+  "version": "1.0.0",
+  "client": {
+    "tlsEnable": true,
+    "adminCredential": {
+      "id": "admin",
+      "password": "123456"
+    },
+    "enableAuthentication": true,
+    "organization": "BENZMSP",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "channels": {
+    "appchannel": {
+      "peers": {
+        "peer0.benz.com": {}
+      }
+    }
+  },
+  "organizations": {
+    "BENZMSP": {
+      "mspid": "BENZMSP",
+      "adminPrivateKey": {
+        "path": "/tmp/crypto/peerOrganizations/benz.com/users/Admin@benz.com/msp/keystore/priv_sk"
+      },
+      "peers": [
+        "peer0.benz.com"
+      ],
+      "signedCert": {
+        "path": "/tmp/crypto/peerOrganizations/benz.com/users/Admin@benz.com/msp/signcerts/Admin@benz.com-cert.pem"
+      }
+    }
+  },
+  "peers": {
+    "peer0.benz.com": {
+      "tlsCACerts": {
+        "path": "/tmp/crypto/peerOrganizations/benz.com/peers/peer0.benz.com/tls/ca.crt"
+      },
+      "url": "grpc://peer0.benz.com:7051"
+    }
+  }
+}
